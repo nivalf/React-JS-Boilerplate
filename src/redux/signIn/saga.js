@@ -1,7 +1,7 @@
 import { all, takeLatest, put } from "redux-saga/effects";
 
 import actions from "./actions";
-import { addUser_db } from "../../utility/firebase/users";
+import { addUser_db } from "../../utility";
 
 // Save a new user to database
 function* saveNewUser_saga(params) {
