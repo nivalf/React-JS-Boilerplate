@@ -1,81 +1,37 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import React from "react";
 import { connect } from "react-redux";
-import SpinCounter from "../containers/SpinCounter";
-import App from "../containers/App";
-import Login from "../containers/Login";
-
-/* Restricted Route (Forward to login Page) 
-    - Uses the prop value: "isLoggedIn" to check
-*/
-const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
-    <Route
-        {...rest}
-        render={(props) =>
-            isLoggedIn !== false ? (
-                <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: "/login",
-                        state: { from: props.location },
-                    }}
-                />
-            )
-        }
-    />
-);
-
-/* Not to stay on login page once logged in */
-const LoginRoute = ({ component: Component, isLoggedIn, ...rest }) => (
-    <Route
-        {...rest}
-        render={(props) =>
-            !isLoggedIn ? (
-                <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: "/home",
-                        state: { from: props.location },
-                    }}
-                />
-            )
-        }
-    />
-);
+import { Route } from "react-router-dom";
+import LoginRoute from "./LoginRoute";
+import ProtectedRoute from "./ProtectedRoute";
+import { loginRoutes, normalRoutes, protectedRoutes } from "./routes";
 
 const PublicRoutes = ({ history, isLoggedIn }) => {
+    /* Normal Routes */
+    const NormalRoutesJSX = normalRoutes.map((routeProps) => (
+        <Route exact {...routeProps} />
+    ));
+
+    /* Restricted Routes */
+    const ProtectedRoutesJSX = protectedRoutes.map((routeProps) => (
+        <ProtectedRoute exact {...routeProps} isLoggedIn={isLoggedIn} />
+    ));
+
+    /* Login Routes */
+    const LoginRoutesJSX = loginRoutes.map((routeProps) => (
+        <LoginRoute exact {...routeProps} isLoggedIn={isLoggedIn} />
+    ));
     return (
         <ConnectedRouter history={history}>
-            <div>
-                {/* Normal Routes */}
-                <Route exact path={"/"} component={SpinCounter} />
-
-                {/* Login Route */}
-                <LoginRoute
-                    path="/login"
-                    component={Login}
-                    isLoggedIn={isLoggedIn}
-                />
-
-                {/* Restricted Routes */}
-                <RestrictedRoute
-                    exact
-                    path="/home"
-                    component={App}
-                    isLoggedIn={isLoggedIn}
-                />
-            </div>
+            {[...NormalRoutesJSX, ...ProtectedRoutesJSX, ...LoginRoutesJSX]}
         </ConnectedRouter>
     );
 };
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: (state?.signIn || {}).hasOwnProperty("user")    // true if signed in
-        ? !!state?.signIn?.user                                 // false if signed out
-        : undefined,                                            // undefined during fetching time
+    isLoggedIn: (state?.signIn || {}).hasOwnProperty("user") // true if signed in
+        ? !!state?.signIn?.user // false if signed out
+        : undefined, // undefined during fetching time
 });
 
 export default connect(mapStateToProps)(PublicRoutes);
