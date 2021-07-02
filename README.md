@@ -11,7 +11,7 @@ A boilerplate for React JS App
 - Hosting: firebase
 
 ## Guide
-1. Clone the repo
+1. Fork the repo
 2. Add the firebase config (src/settings/firebase/firebaseConfig.json)
 3. Update Libraries
 	- on updating react-scripts it will be as good as creating a new app with cra
