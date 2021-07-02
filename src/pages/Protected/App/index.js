@@ -5,11 +5,24 @@
 
 import React from "react";
 import { connect } from "react-redux";
+import { Layout } from "../../../components";
 import AppRouter from "./AppRouter";
+import Footer from "./Footer";
+import Header from "./Header";
 
-const App = (props) => {
+const { Content } = Layout;
 
-    return <AppRouter  />;
+const App = () => {
+    return (
+        <Layout>
+            <Header />
+            <Content>
+                <AppRouter />;
+            </Content>
+
+            <Footer />
+        </Layout>
+    );
 };
 
 const mapStateToProps = (state) => ({
