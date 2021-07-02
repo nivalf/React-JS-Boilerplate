@@ -1,10 +1,10 @@
 {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "projectId": "",
-    "storageBucket": "",
-    "messagingSenderId": "",
-    "appId": "",
-    "measurementId": ""
+    "apiKey": "AIzaSyAyxKzJONtLwOtTJovkb4aSDSwgNrj1YXI",
+    "authDomain": "login-with-firebaseui-58ef7.firebaseapp.com",
+    "databaseURL": "https://login-with-firebaseui-58ef7.firebaseio.com",
+    "projectId": "login-with-firebaseui-58ef7",
+    "storageBucket": "login-with-firebaseui-58ef7.appspot.com",
+    "messagingSenderId": "826579076915",
+    "appId": "1:826579076915:web:7f5dbde8e7d8e9b61fa046",
+    "measurementId": "G-YHKDLWMRZV"
 }

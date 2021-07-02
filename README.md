@@ -12,9 +12,10 @@ A boilerplate for React JS App
 
 ## Guide
 1. Fork the repo
-2. Add the firebase config (src/settings/firebase/firebaseConfig.json)
-3. Update Libraries
+2. Update Libraries
 	- on updating react-scripts it will be as good as creating a new app with cra
 	- **Note**: history v5.0.1 doesn't work. Use v4.10.1
+3. Add the firebase config (src/settings/firebase/firebaseConfig.json)
+4. Setup the auth providers in firebase authentication & mirror the same in src/settings/firebase/uiConfig.js
 	
 All set..
