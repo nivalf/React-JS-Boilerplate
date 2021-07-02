@@ -6,12 +6,12 @@ import React from "react";
 import { Provider } from "react-redux";
 import { store, history } from "./redux/store";
 import PublicRoutes from "./router";
-import "./App.less";           // app level css
+import "./PublicApp.less";           // app level css
 
-const App = () => (
+const PublicApp = () => (
     <Provider store={store}>
         <PublicRoutes history={history} />
     </Provider>
 );
 
-export default App;
+export default PublicApp;

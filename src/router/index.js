@@ -1,29 +1,44 @@
 import { ConnectedRouter } from "connected-react-router";
 import React from "react";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import LoginRoute from "./LoginRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import { loginRoutes, normalRoutes, protectedRoutes } from "./routes";
+import { loginRoutes, publicRoutes, protectedRoutes } from "./routes";
 
 const PublicRoutes = ({ history, isLoggedIn }) => {
-    /* Normal Routes */
-    const NormalRoutesJSX = normalRoutes.map((routeProps) => (
-        <Route exact {...routeProps} />
-    ));
-
-    /* Restricted Routes */
-    const ProtectedRoutesJSX = protectedRoutes.map((routeProps) => (
-        <ProtectedRoute exact {...routeProps} isLoggedIn={isLoggedIn} />
+    /* Public Routes */
+    const PublicRoutesJSX = publicRoutes.map((routeProps, index) => (
+        <Route exact {...routeProps} key={`public_${index}`} />
     ));
 
     /* Login Routes */
-    const LoginRoutesJSX = loginRoutes.map((routeProps) => (
-        <LoginRoute exact {...routeProps} isLoggedIn={isLoggedIn} />
+    const LoginRoutesJSX = loginRoutes.map((routeProps, index) => (
+        <LoginRoute
+            exact
+            {...routeProps}
+            isLoggedIn={isLoggedIn}
+            key={`login_${index}`}
+        />
+    ));
+
+    /* Protected Routes 
+        - Ideally just add the protected app here. So that it will be accessible only after sign in
+        - Inside the App, add another level of routing. 
+    */
+    const ProtectedRoutesJSX = protectedRoutes.map((routeProps, index) => (
+        <ProtectedRoute
+            // exact
+            {...routeProps}
+            isLoggedIn={isLoggedIn}
+            key={`protected_${index}`}
+        />
     ));
     return (
         <ConnectedRouter history={history}>
-            {[...NormalRoutesJSX, ...ProtectedRoutesJSX, ...LoginRoutesJSX]}
+            <Switch>
+                {[...PublicRoutesJSX, ...LoginRoutesJSX, ...ProtectedRoutesJSX]}
+            </Switch>
         </ConnectedRouter>
     );
 };

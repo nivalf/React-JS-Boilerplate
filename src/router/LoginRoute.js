@@ -11,7 +11,7 @@ const LoginRoute = ({ component: Component, isLoggedIn, ...rest }) => (
             ) : (
                 <Redirect
                     to={{
-                        pathname: "/home",
+                        pathname: "/",
                         state: { from: props.location },
                     }}
                 />
