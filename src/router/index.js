@@ -44,9 +44,9 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
 };
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: (state?.signIn || {}).hasOwnProperty("user") // true if signed in
-        ? !!state?.signIn?.user // false if signed out
-        : undefined, // undefined during fetching time
+    isLoggedIn: (state?.signIn || {}).hasOwnProperty("user") // true : signed in
+        ? !!state?.signIn?.user // false : signed out
+        : undefined, // undefined : fetching
 });
 
 export default connect(mapStateToProps)(PublicRoutes);

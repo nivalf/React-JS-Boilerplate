@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { routes } from "./routes";
 
-const AppRoutes = (props) => {
+const AppRoutes = () => {
     /* Public Routes */
 
     return (
