@@ -19,3 +19,4 @@ export * from "./Row";
 export * from "./Col";
 export * from "./Typography";
 export * from "./Image";
+export * from "./Layout";
